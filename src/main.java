@@ -5,5 +5,6 @@ public class main{
 		
 		int val = london.compareTo(glasgow);
 		System.out.println(val);
+		Parser.importData("cities.txt");
 	}
 }
