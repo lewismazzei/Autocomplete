@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.Collections;
 
 public class Term implements Comparable<Term>{
 	String query;
@@ -9,9 +10,21 @@ public class Term implements Comparable<Term>{
 		this.weight = weight;
 	}
 
-	public static Comparator<Term> byReverseWeightOrder() {return null;}
+	public static Comparator<Term> byReverseWeightOrder() {
+		@Override
+		public int compare(Term term1, Term term2){
+			long weight1 = term1.weight;
+			long weight2 = term2.weight;
+			if(weight1 > weight2){
+					return 1;
+			}else if(weight1 < weight2){
+					return -1;
+			}
+			return 0;
+		}
+	}
 
-	public static Comparator<Term> byPrefixOrder(int r) {return null;}
+	public static Comparator<Term> byPrefixOrder(int r) {return 0;}
 
 	public int compareTo(Term that) {
 		String shortestTerm = "";
