@@ -1,60 +1,51 @@
 import java.util.Comparator;
-import java.util.Collections;
 
 public class Term implements Comparable<Term>{
-	String query;
-	long weight;
+	private final String QUERY;
+	private final long WEIGHT;
 
-	public Term(String query, long weight) {
-		this.query = query;
-		this.weight = weight;
+	public Term(String QUERY, long WEIGHT) {
+		this.QUERY = QUERY;
+		this.WEIGHT = WEIGHT;
 	}
 
 	public static Comparator<Term> byReverseWeightOrder() {
-		@Override
-		public int compare(Term term1, Term term2){
-			long weight1 = term1.weight;
-			long weight2 = term2.weight;
-			if(weight1 > weight2){
-					return 1;
-			}else if(weight1 < weight2){
-					return -1;
-			}
-			return 0;
-		}
+	    return (term1, term2) -> (int)(term2.WEIGHT - term1.WEIGHT);
 	}
 
-	public static Comparator<Term> byPrefixOrder(int r) {return 0;}
+	public static Comparator<Term> byPrefixOrder(int r) {
+	    return (term1, term2) -> (int)(term1.QUERY.substring(0,r+1).compareTo(term2.QUERY.substring(0,r+1)));
+    }
 
 	public int compareTo(Term that) {
-		String shortestTerm = "";
+        //find the shortest query to determine how many characters we need to loop through (if they're the same length this is arbitrary)
+		String shortestTerm = this.QUERY.length() < that.QUERY.length() ? this.QUERY : that.QUERY;
 
-		if (this.query.length() < that.query.length()) {
-			shortestTerm = this.query;
-		} else {
-			shortestTerm = that.query;
-		}
+		//loop through as many characters as the shortest term has, if at any point the characters are not the same then the lexicographic order
+        // can be determined and a relevant integer value can be returned
 		for (int i=0; i<shortestTerm.length(); i++) {
-			if ((int)this.query.charAt(i) < (int)that.query.charAt(i)) {
-				return -1;
-			}
-			if ((int)this.query.charAt(i) > (int)that.query.charAt(i)) {
-				return 1;
-			}
+		    if ((int)this.QUERY.charAt(i) != (int)that.QUERY.charAt(i)) {
+		        return (int)this.QUERY.charAt(i) - (int)that.QUERY.charAt(i);
+            }
 		}
-		if (this.query.length() == that.query.length()) {
+		//if the characters have all matched and the queries are the same length then the words are equal so return 0
+		if (this.QUERY.length() == that.QUERY.length()) {
 			return 0;
+        //if they are not the same length then determine the order based on the length of the queries (shortest query is lexicographically 'first')
 		} else {
-			if (shortestTerm.equals(this.query)) {
-				return -1;
-			} else {
-				return 1;
-			}
+			return this.QUERY.length() - that.QUERY.length();
 		}
 	}
 
 	public String toString() {
-		String output = this.weight + "\t" + this.query;
-		return output;
+	    return this.WEIGHT + " : " + this.QUERY;
 	}
+
+    public String getQUERY() {
+        return QUERY;
+    }
+
+    public long getWEIGHT() {
+        return WEIGHT;
+    }
 }
