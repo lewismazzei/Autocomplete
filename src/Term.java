@@ -53,5 +53,8 @@ public class Term implements Comparable<Term>{
 		}
 	}
 
-	public String toString() {return null;}
+	public String toString() {
+		String output = this.weight + "\t" + this.query;
+		return output;
+	}
 }
