@@ -1,45 +1,38 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.util.List;
 import java.util.ArrayList;
 
 public class Parser{
-	static void importData(String fileName){
+	public static ArrayList<Term> importData(String fileName) {
 		Pattern weightPattern = Pattern.compile("[^\\s](\\d*)\t");
 		Pattern namePattern = Pattern.compile("(?:\t)(.*)");
-		List<Term> cityList = new ArrayList<Term>();
-		try{
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
-			System.out.println("File opened successfully");
-			int line = 0;
-			for(String x = in.readLine(); x != null; x = in.readLine()){
-				line++;
-				Matcher weightMatcher = weightPattern.matcher(x);
-				Matcher nameMatcher = namePattern.matcher(x);
-				if(!weightMatcher.find()){
-					System.out.println("No matches");
-				}else{
-					System.out.println(weightMatcher.group(0));
+		ArrayList<Term> terms = new ArrayList<>();
+
+		try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
+
+			String line; in.readLine();
+
+			while ((line = in.readLine()) != null) {
+				Matcher weightMatcher = weightPattern.matcher(line);
+				Matcher nameMatcher = namePattern.matcher(line);
+				
+				if (!weightMatcher.find()) {
+					System.out.println("No match for weight");
+					continue;
 				}
-				if(!nameMatcher.find()){
-					System.out.println("No matched names");
+				if (!nameMatcher.find()) {
+					System.out.println("No match for name");
+					continue;
 				}
-				if(weightMatcher.find() && nameMatcher.find()){
-					long weight = Long.parseLong(weightMatcher.group(0), 10);
-					Term city = new Term(nameMatcher.group(0), weight);
-					cityList.add(city);
-					System.out.println(city.query);
-				}
+				
+				terms.add(new Term(nameMatcher.group(0).trim(), Long.parseLong(weightMatcher.group(0).trim())));
 			}
-			for(int i = 0; i < cityList.size(); i++){
-				System.out.println(cityList.get(i).query);
-			}
-		}catch(IOException e){
-			System.out.println("File IO Error!");
+		} catch (FileNotFoundException e) {
+			System.out.println("File could not be found " + e.getMessage());
+		} catch (IOException e){
+			System.out.println("IO Error: " + e.getMessage());
 		}
+		return terms;
 	}
 }
