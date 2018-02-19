@@ -1,10 +1,13 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.ArrayList;
 
 public class Parser{
-	public static ArrayList<Term> importData(String fileName) {
+	public static Term[] importData(String fileName) {
 		Pattern weightPattern = Pattern.compile("[^\\s](\\d*)\t");
 		Pattern namePattern = Pattern.compile("(?:\t)(.*)");
 		ArrayList<Term> terms = new ArrayList<>();
@@ -33,6 +36,6 @@ public class Parser{
 		} catch (IOException e){
 			System.out.println("IO Error: " + e.getMessage());
 		}
-		return terms;
+		return terms.toArray(new Term[terms.size()]);
 	}
 }
