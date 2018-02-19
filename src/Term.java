@@ -17,7 +17,8 @@ public class Term implements Comparable<Term>{
 	}
 
 	public static Comparator<Term> byPrefixOrder(int r) {
-	    return (term1, term2) -> (int)(term1.query.substring(0,r).compareTo(term2.query.substring(0,r)));
+            return (term1, term2) -> (int)(term1.query.substring(0,r).toLowerCase().compareTo(term2.query.substring(0,r).toLowerCase()));
+
     }
 
 	public int compareTo(Term that) {
@@ -26,28 +27,21 @@ public class Term implements Comparable<Term>{
         String query1 = this.query.toLowerCase();
         String query2 = that.query.toLowerCase();
 
-		System.out.println(query1 + " " + query2);
-
         //find the shortest query to determine how many characters we need to loop through (if they're the same length this is arbitrary)
 		String shortestTerm = query1.length() < query2.length() ? query1 : query2;
 
-		System.out.println(shortestTerm);
-
 		//loop through as many characters as the shortest term has, if at any point the characters are not the same then the lexicographic order
-        // can be determined and a relevant integer value can be returned
+        //can be determined and a relevant integer value can be returned
 		for (int i=0; i<shortestTerm.length(); i++) {
 		    if ((int)query1.charAt(i) != (int)query2.charAt(i)) {
-				System.out.println("Char order: " + ((int)query1.charAt(i) - (int)query2.charAt(i)));
 				return (int)query1.charAt(i) - (int)query2.charAt(i);
             }
 		}
 		//if the characters have all matched and the queries are the same length then the words are equal so return 0
 		if (query1.length() == query2.length()) {
-			System.out.println(0);
 			return 0;
         //if they are not the same length then determine the order based on the length of the queries (shortest query is lexicographically 'first')
 		} else {
-			System.out.println("Length order: " + (query1.length() - query2.length()));
 			return query1.length() - query2.length();
 		}
 	}
