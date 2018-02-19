@@ -23,21 +23,22 @@ public class Autocomplete {
 	}
 
 	public static void main(String[] args) {
+		//initialise array, import data
 		Term[] cities = Parser.importData("cities.txt");
-
-		String prefix = "glas";
-
+		//cast array to list
 		List<Term> sortedCities = Arrays.asList(cities);
-
+		//sort the list lexicographically
 		Collections.sort(sortedCities);
-
+		//cast list back to array
 		sortedCities.toArray(cities);
-
+		//input string
+		String prefix = "glas";
+		//find first and last occurence of queries matching the input string
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-
+		//create an array of matches by taking the subset of the full array between the first and last occurence
 		Term[] matches = Arrays.copyOfRange(cities, firstIndex, lastIndex);
-
+		//print out matches
 		for (Term match : matches) {
 			System.out.println(match.getQuery());
 		}
