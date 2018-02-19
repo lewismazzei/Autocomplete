@@ -42,6 +42,7 @@ public class Autocomplete {
 		for (Term match : matches) {
 			System.out.println(match.getQuery());
 		}
+		gui.initGui();
 	}
 }
 //this took me ages to work out, realised i didn't need it but keeping it around in case it turns out we do need it for some reason
