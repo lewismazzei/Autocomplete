@@ -11,13 +11,17 @@ public class BinarySearchDeluxe {
         int index = binarySearch(a, key, comparator);
 
         if (index >= 0) {
-            while (comparator.compare(a[index], a[index - 1]) == 0 && index > 0) {
-                index--;
+            for (int i = index; i >= 0; i--) {
+                if (i == 0) {
+                    return i;
+                } else {
+                    if (comparator.compare(a[i], a[i-1]) != 0) {
+                        return i;
+                    }
+                }
             }
-            return index;
-        } else {
-            return -1;
         }
+        return -1;
     }
 
     //returns the index of the last key in a[] that equals the search key, or -1 if no such key.
@@ -29,13 +33,17 @@ public class BinarySearchDeluxe {
         int index = binarySearch(a, key, comparator);
 
         if (index >= 0) {
-            while (comparator.compare(a[index], a[index+1]) == 0 && index < a.length-2) {
-                index++;
+            for (int i = index; i < a.length; i++) {
+                if (i == a.length - 1) {
+                    return i;
+                } else {
+                    if (comparator.compare(a[i], a[i+1]) != 0) {
+                        return i;
+                    }
+                }
             }
-            return index;
-        } else {
-            return -1;
         }
+        return -1;
     }
 
     //binary search implementation using custom comparator
@@ -46,7 +54,7 @@ public class BinarySearchDeluxe {
 
         int lowIndex = 0;
         int middleIndex;
-        int highIndex = a.length;
+        int highIndex = a.length - 1;
 
         while (lowIndex <= highIndex) {
             middleIndex = (highIndex + lowIndex) / 2;
