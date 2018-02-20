@@ -39,7 +39,7 @@ public class Autocomplete {
 	}
 
 	public static void main(String[] args) {
-		String filename = "";
+		String fileName = "";
 		String k = "";
 
 		try {

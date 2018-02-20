@@ -11,26 +11,24 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Collections;
 
-public class gui {
-
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    static void initGui() {
-        //Will use this later to customise the gui
-        String xmlFile = "laf.xml";
-        SynthLookAndFeel laf = new SynthLookAndFeel();
-
-        try {
-            laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        try {
-            UIManager.setLookAndFeel(laf);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+public class gui{
+	final static boolean shouldFill = true;
+	final static boolean shouldWeightX = true;
+	static void initGui(){
+		
+		//Will use this later to customise the gui
+		String xmlFile = "laf.xml";
+		SynthLookAndFeel laf = new SynthLookAndFeel();
+		try{
+		laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+		}catch(Exception e){
+			System.out.println(e);			
+		}
+		try{
+		UIManager.setLookAndFeel(laf);
+		}catch(Exception e){
+			System.out.println(e);
+		}
 
 		JFrame f = new JFrame();
 		f.setLayout(new GridBagLayout());
@@ -38,7 +36,10 @@ public class gui {
 		if(shouldFill){
 			c.fill = GridBagConstraints.HORIZONTAL;
 		}
-		
+		c.insets = new Insets(20,20,20,20);
+				
+		c.fill = GridBagConstraints.HORIZONTAL;
+
 		//Sort out the array
 		Term[] cities = Parser.importData("cities.txt");
 		java.util.List<Term> searchQueryList = Arrays.asList(cities);
@@ -57,7 +58,8 @@ public class gui {
 		if(shouldWeightX){
 			c.weightx = 0.5;
 		}
-		c.gridx = 0;
+		c.weighty = 0.0;
+		c.gridx = 1;
 		c.gridy = 0;
 
 
@@ -65,12 +67,20 @@ public class gui {
 		
 		//Show everything
 		f.add(destination, c);
-		c.gridx = 0;
-		c.gridy = 1;
-		f.add(searchCombo, c);
 		c.gridx = 1;
 		c.gridy = 1;
+		f.add(searchCombo, c);
+		c.gridx = 2;
+		c.gridy = 1;
 		f.add(showButton, c);
+		c.weighty = 1.0;
+
+		c.gridy=3;
+		c.fill = GridBagConstraints.BOTH;
+		c.anchor = GridBagConstraints.LINE_END;
+		c.gridheight = GridBagConstraints.REMAINDER;
+		f.add(Box.createGlue(), c);
+
 		f.setVisible(true);
 	}
 }
