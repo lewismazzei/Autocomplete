@@ -19,11 +19,17 @@ public class gui{
 		//Will use this later to customise the gui
 		String xmlFile = "laf.xml";
 		SynthLookAndFeel laf = new SynthLookAndFeel();
-		try{
-		laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+		try {
+		    laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+		} catch (Exception e){
+			
 		}catch(Exception e){
-			System.out.println(e);			
+			System.out.println(e);
 		}
+		try {
+			UIManager.setLookAndFeel(laf);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		try{
 		UIManager.setLookAndFeel(laf);
 		}catch(Exception e){
