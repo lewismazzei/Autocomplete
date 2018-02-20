@@ -13,6 +13,8 @@ import java.util.Collections;
 
 public class gui {
 
+    final static boolean shouldFill = true;
+    final static boolean shouldWeightX = true;
     static void initGui() {
         //Will use this later to customise the gui
         String xmlFile = "laf.xml";
