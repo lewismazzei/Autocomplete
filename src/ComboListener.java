@@ -17,7 +17,7 @@ public class ComboListener extends KeyAdapter{
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void keyTyped(KeyEvent key){
+	public void keyReleased(KeyEvent key){
 				//Get text from input
 				String text = ((JTextField)key.getSource()).getText();
 				System.out.println(text);
