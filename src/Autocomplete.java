@@ -15,9 +15,10 @@ public class Autocomplete {
 		//find the first
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-
 		Term[] matches = Arrays.copyOfRange(terms, firstIndex, lastIndex);
-
+		for(Term match : matches){
+			System.out.println(match.getQuery());
+		}
 		List<Term> matchesList = Arrays.asList(matches);
 
 		matchesList.sort(Term.byReverseWeightOrder());

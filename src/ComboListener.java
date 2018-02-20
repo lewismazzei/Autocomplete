@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 public class ComboListener extends KeyAdapter{
 	JComboBox listener;
 	Term[] array;
+	Autocomplete autocomplete = new Autocomplete(Parser.importData("cities.txt"));
 	
 	@SuppressWarnings("rawtypes")
 	public ComboListener(JComboBox listenerParam, Term[] arrayParam){
@@ -25,25 +26,39 @@ public class ComboListener extends KeyAdapter{
 				//Set selected index as -1
 				listener.setSelectedIndex(-1);
 				((JTextField)listener.getEditor().getEditorComponent()).setText(text);
-				listener.showPopup();
+				if(text != ""){
+					listener.showPopup();
+				}else{
+					listener.hidePopup();
+				}
 	}
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String[] getFilteredList(String text){
-		//This is the part that isn't quite working.
-		//firstIndexOf appears to return -1 no matter what I type, maybe I 
-		//set something up wrong?
-		//int firstIndex = BinarySearchDeluxe.firstIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
-		//int lastIndex = BinarySearchDeluxe.lastIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
-		//Term[] matches = Arrays.copyOfRange(array, firstIndex, lastIndex);
+		long startTime = System.nanoTime();
+		int firstIndex = BinarySearchDeluxe.firstIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
+		int lastIndex = BinarySearchDeluxe.lastIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
+		//System.out.println(firstIndex + " " + lastIndex);	
+		Term[] matches = Arrays.copyOfRange(array, firstIndex, lastIndex);
+		java.util.List<String> matchedQueries = new ArrayList<String>();
+		for(Term match : matches){
+			matchedQueries.add(match.getQuery());
+		}
+		String[] finalArray = new String[matchedQueries.size()];
+		matchedQueries.toArray(finalArray);
+		long endTime = System.nanoTime();
+		long duration = ((endTime - startTime)/1000000);
+		//System.out.println(duration);
+		return finalArray;
+
 		//java.util.List<String> matchedQueries = new ArrayList<String>();
-		//for(Term match : matches){
-		//	matchedQueries.add(match.getQuery());
+		//Term[] terms = autocomplete.allMatches(text);
+		//for(Term term : terms ){
+		//	matchedQueries.add(term.getQuery());
 		//}
 		//String[] finalArray = new String[matchedQueries.size()];
 		//matchedQueries.toArray(finalArray);
 		//return finalArray;
-		Autocomplete.allMatches(text);
 	}
 }
