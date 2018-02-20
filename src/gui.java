@@ -15,7 +15,7 @@ public class gui {
 	final static boolean shouldFill = true;
 	final static boolean shouldWeightX = true;
 
-	static void initGui(Autocomplete autocomplete){
+	static void initGui(Autocomplete autocomplete, int k){
 		
 		//Will use this later to customise the gui
 		String xmlFile = "laf.xml";
@@ -57,7 +57,7 @@ public class gui {
 		JTextField editor = (JTextField) searchCombo.getEditor().getEditorComponent();
 		editor.setFocusable(true);
 		editor.setText("");
-		editor.addKeyListener(new ComboListener(searchCombo, autocomplete));
+		editor.addKeyListener(new ComboListener(searchCombo, autocomplete, k));
 		if(shouldWeightX){
 			c.weightx = 0.5;
 		}

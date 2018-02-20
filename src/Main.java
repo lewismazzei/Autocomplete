@@ -11,6 +11,6 @@ public class Main {
         }
 
         //initialise gui
-        gui.initGui(new Autocomplete(Parser.importData(fileName)));
+        gui.initGui(new Autocomplete(Parser.importData(fileName)), Integer.parseInt(k));
     }
 }
