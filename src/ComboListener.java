@@ -34,15 +34,16 @@ public class ComboListener extends KeyAdapter{
 		//This is the part that isn't quite working.
 		//firstIndexOf appears to return -1 no matter what I type, maybe I 
 		//set something up wrong?
-		int firstIndex = BinarySearchDeluxe.firstIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
-		int lastIndex = BinarySearchDeluxe.lastIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
-		Term[] matches = Arrays.copyOfRange(array, firstIndex, lastIndex);
-		java.util.List<String> matchedQueries = new ArrayList<String>();
-		for(Term match : matches){
-			matchedQueries.add(match.getQuery());
-		}
-		String[] finalArray = new String[matchedQueries.size()];
-		matchedQueries.toArray(finalArray);
-		return finalArray;
+		//int firstIndex = BinarySearchDeluxe.firstIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
+		//int lastIndex = BinarySearchDeluxe.lastIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
+		//Term[] matches = Arrays.copyOfRange(array, firstIndex, lastIndex);
+		//java.util.List<String> matchedQueries = new ArrayList<String>();
+		//for(Term match : matches){
+		//	matchedQueries.add(match.getQuery());
+		//}
+		//String[] finalArray = new String[matchedQueries.size()];
+		//matchedQueries.toArray(finalArray);
+		//return finalArray;
+		Autocomplete.allMatches(text);
 	}
 }
