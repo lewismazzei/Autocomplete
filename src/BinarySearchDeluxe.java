@@ -8,19 +8,26 @@ public class BinarySearchDeluxe {
             throw new NullPointerException();
         }
 
-        int index = binarySearch(a, key, comparator);
+        //find a random index that matches the key
+        int j = binarySearch(a, key, comparator);
 
-        if (index >= 0) {
-            for (int i = index; i >= 0; i--) {
+        //if a key has been found...
+        if (j >= 0) {
+            //...loop from the random index towards the start of the array
+            for (int i = j; i >= 0; i--) {
+                //if the start of the list has been reached the first index has been found
                 if (i == 0) {
                     return i;
+                //otherwise, check to see if the next element to the left still matches the prefix, if it doesn't, the first index has been found
                 } else {
                     if (comparator.compare(a[i], a[i-1]) != 0) {
                         return i;
                     }
+                    //if the next element to the left did still match the prefix then just continue looping through elements
                 }
             }
         }
+        //if the key has not been found return -1
         return -1;
     }
 
@@ -30,19 +37,26 @@ public class BinarySearchDeluxe {
             throw new NullPointerException();
         }
 
-        int index = binarySearch(a, key, comparator);
+        //find a random index that matches the key
+        int j = binarySearch(a, key, comparator);
 
-        if (index >= 0) {
-            for (int i = index; i < a.length; i++) {
+        //if a key has been found...
+        if (j >= 0) {
+            //...loop from the random index towards the end of the array
+            for (int i = j; i < a.length; i++) {
+                //if the end of the list has been reached the last index has been found
                 if (i == a.length - 1) {
                     return i;
+                //otherwise, check to see if the next element to the right still matches the prefix, if it doesn't, the last index has been found
                 } else {
                     if (comparator.compare(a[i], a[i+1]) != 0) {
                         return i;
                     }
+                    //if the next element to the right did still match the prefix then just continue looping through elements
                 }
             }
         }
+        //if the key has not been found return -1
         return -1;
     }
 
