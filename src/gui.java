@@ -11,30 +11,24 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Collections;
 
-public class gui{
-	final static boolean shouldFill = true;
-	final static boolean shouldWeightX = true;
-	static void initGui(){
-		
-		//Will use this later to customise the gui
-		String xmlFile = "laf.xml";
-		SynthLookAndFeel laf = new SynthLookAndFeel();
-		try {
-		    laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
-		} catch (Exception e){
-			
-		}catch(Exception e){
-			System.out.println(e);
-		}
-		try {
-			UIManager.setLookAndFeel(laf);
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		try{
-		UIManager.setLookAndFeel(laf);
-		}catch(Exception e){
-			System.out.println(e);
-		}
+public class gui {
+
+    static void initGui() {
+        //Will use this later to customise the gui
+        String xmlFile = "laf.xml";
+        SynthLookAndFeel laf = new SynthLookAndFeel();
+
+        try {
+            laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            UIManager.setLookAndFeel(laf);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
 		JFrame f = new JFrame();
 		f.setLayout(new GridBagLayout());
