@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Collections;
 
-public class gui{
+public class gui {
 	final static boolean shouldFill = true;
 	final static boolean shouldWeightX = true;
-	static void initGui(){
+
+	static void initGui(Autocomplete autocomplete){
 		
 		//Will use this later to customise the gui
 		String xmlFile = "laf.xml";
@@ -56,7 +57,7 @@ public class gui{
 		JTextField editor = (JTextField) searchCombo.getEditor().getEditorComponent();
 		editor.setFocusable(true);
 		editor.setText("");
-		editor.addKeyListener(new ComboListener(searchCombo, cities));
+		editor.addKeyListener(new ComboListener(searchCombo, autocomplete));
 		if(shouldWeightX){
 			c.weightx = 0.5;
 		}

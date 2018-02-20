@@ -10,7 +10,7 @@ public class Main {
             e.getMessage();
         }
 
-
-        gui.initGui();
+        //initialise gui
+        gui.initGui(new Autocomplete(Parser.importData(fileName)));
     }
 }
