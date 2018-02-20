@@ -21,7 +21,7 @@ public class ComboListener extends KeyAdapter{
 				//Get text from input
 				String text = ((JTextField)key.getSource()).getText();
 				//Set list as filtered list from other method
-				//listener.setModel(new DefaultComboBoxModel(getFilteredList(text)));
+				listener.setModel(new DefaultComboBoxModel(getFilteredList(text)));
 				//Set selected index as -1
 				listener.setSelectedIndex(-1);
 				((JTextField)listener.getEditor().getEditorComponent()).setText(text);

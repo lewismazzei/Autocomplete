@@ -12,8 +12,10 @@ import java.util.Vector;
 import java.util.Collections;
 
 public class gui{
-	
+	final static boolean shouldFill = true;
+	final static boolean shouldWeightX = true;
 	static void initGui(){
+		
 		//Will use this later to customise the gui
 		String xmlFile = "laf.xml";
 		SynthLookAndFeel laf = new SynthLookAndFeel();
@@ -29,7 +31,11 @@ public class gui{
 		}
 
 		JFrame f = new JFrame();
-		f.setLayout(new FlowLayout());
+		f.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		if(shouldFill){
+			c.fill = GridBagConstraints.HORIZONTAL;
+		}
 		
 		//Sort out the array
 		Term[] cities = Parser.importData("cities.txt");
@@ -40,18 +46,29 @@ public class gui{
 		//Create combobox and add Key Listener
 		JLabel destination = new JLabel("Destination:");
 		final JComboBox searchCombo = new JComboBox();
+		searchCombo.setPrototypeDisplayValue("xxxxxxxxxxxxxxx");
 		searchCombo.setEditable(true);
 		JTextField editor = (JTextField) searchCombo.getEditor().getEditorComponent();
 		editor.setFocusable(true);
 		editor.setText("");
 		editor.addKeyListener(new ComboListener(searchCombo, cities));
+		if(shouldWeightX){
+			c.weightx = 0.5;
+		}
+		c.gridx = 0;
+		c.gridy = 0;
+
 
 		JButton showButton = new JButton("Search");
 		
 		//Show everything
-		f.add(destination);
-		f.add(searchCombo);
-		f.add(showButton);
+		f.add(destination, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		f.add(searchCombo, c);
+		c.gridx = 1;
+		c.gridy = 1;
+		f.add(showButton, c);
 		f.setVisible(true);
 	}
 }
