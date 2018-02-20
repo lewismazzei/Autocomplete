@@ -6,21 +6,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-public class ComboListener extends KeyAdapter
-{
+public class ComboListener extends KeyAdapter{
 	JComboBox listener;
 	Term[] array;
 	
 	@SuppressWarnings("rawtypes")
-	public ComboListener(JComboBox listenerParam, Term[] arrayParam)
-	{
+	public ComboListener(JComboBox listenerParam, Term[] arrayParam){
 		listener = listenerParam;
 		array = arrayParam;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void keyTyped(KeyEvent key)
-	{
+	public void keyTyped(KeyEvent key){
 				//Get text from input
 				String text = ((JTextField)key.getSource()).getText();
 				//Set list as filtered list from other method
@@ -33,8 +30,10 @@ public class ComboListener extends KeyAdapter
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public String[] getFilteredList(String text)
-	{
+	public String[] getFilteredList(String text){
+		//This is the part that isn't quite working.
+		//firstIndexOf appears to return -1 no matter what I type, maybe I 
+		//set something up wrong?
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(array, new Term(text, 0), Term.byPrefixOrder(text.length()));
 		Term[] matches = Arrays.copyOfRange(array, firstIndex, lastIndex);

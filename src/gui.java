@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.text.ParseException;
+import java.net.URL;
+import java.net.MalformedURLException;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.io.*;
 import java.awt.*;
@@ -12,7 +15,17 @@ public class gui{
 	
 	static void initGui(){
 		//Will use this later to customise the gui
-		SynthLookAndFeel laf = new SynthLookAndFeel(); 
+		String xmlFile = "laf.xml";
+		SynthLookAndFeel laf = new SynthLookAndFeel();
+		try{
+		laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+		}catch(Exception e){
+			
+		}
+		try{
+		UIManager.setLookAndFeel(laf);
+		}catch(Exception e){
+		}
 
 		JFrame f = new JFrame();
 		f.setLayout(new FlowLayout());
