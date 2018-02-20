@@ -3,8 +3,8 @@
 	<opaque value="true"/>
 	<font name="Veranda" size="14"/>
 	<state>
-		<color value="#ffffff" type="BACKGROUND"/>
-		<color value="#999999" type="FOREGROUND"/>
+		<color value="#e6fffa" type="BACKGROUND"/>
+		<color value="#2fb0c6" type="FOREGROUND"/>
 	</state>
 </style>
 <bind style="background" type="region" key=".*"/>
@@ -12,11 +12,11 @@
 	<opaque value="true"/>
 	<insets top="4" left="4" right="4" bottom="4" />
 	<state>
-		<color type="BACKGROUND" value="#999999"/>
-		<color type="FOREGROUND" value="#ebebe0"/>
+		<color type="BACKGROUND" value="#2fb0c6"/>
+		<color type="FOREGROUND" value="#000000"/>
 	</state>
 	<state value="MOUSE_OVER" id="one">
-			<color type="BACKGROUND" value="#737373"/>
+			<color type="BACKGROUND" value="#90e5f3"/>
 			<color type="FOREGROUND" value="#ebebe0"/>
 	</state>
 </style>

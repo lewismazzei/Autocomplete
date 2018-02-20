@@ -9,15 +9,17 @@ import javax.swing.JTextField;
 public class ComboListener extends KeyAdapter{
 	JComboBox listener;
 	Autocomplete autocomplete;
-	
+	int k;	
 	@SuppressWarnings("rawtypes")
-	public ComboListener(JComboBox listener, Autocomplete autocomplete){
+	public ComboListener(JComboBox listener, Autocomplete autocomplete, int k){
 		this.autocomplete = autocomplete;
 		this.listener = listener;
+		this.k = k;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void keyReleased(KeyEvent key){
+				int i = 0;
 				//Get text from input
 				String text = ((JTextField)key.getSource()).getText();
 				System.out.println(text);
@@ -30,7 +32,10 @@ public class ComboListener extends KeyAdapter{
 
 				if (termMatches != null) {
 					for (Term match : termMatches) {
+						if(i < 5){
 						matches.add(match.getQuery());
+						i++;
+						}
 						//System.out.println(match);
 					}
 				}
