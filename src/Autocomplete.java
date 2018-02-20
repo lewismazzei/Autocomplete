@@ -31,17 +31,26 @@ public class Autocomplete {
 		Collections.sort(sortedCities);
 		//cast list back to array
 		sortedCities.toArray(cities);
+		System.out.println(cities[cities.length-1]);
 		//input string
-		String prefix = "glas";
+		String prefix = "진";
 		//find first and last occurence of queries matching the input string
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+		System.out.println(firstIndex + " : " + lastIndex);
+		System.out.println(cities[firstIndex].getQuery() + " : " + cities[lastIndex].getQuery());
 		//create an array of matches by taking the subset of the full array between the first and last occurence
-		Term[] matches = Arrays.copyOfRange(cities, firstIndex, lastIndex);
-		//print out matches
-		for (Term match : matches) {
-			System.out.println(match.getQuery());
+		Term[] matches = null;
+		try {
+			matches = Arrays.copyOfRange(cities, firstIndex, lastIndex);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("First Index: " + firstIndex + "\nLast Index: " + lastIndex);
 		}
+
+		//print out matches
+		//for (Term match : matches) {
+		//	System.out.println(match.getQuery());
+		//}
 	}
 }
 //this took me ages to work out, realised i didn't need it but keeping it around in case it turns out we do need it for some reason
