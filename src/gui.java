@@ -14,6 +14,8 @@ import java.util.Collections;
 public class gui {
 	final static boolean shouldFill = true;
 	final static boolean shouldWeightX = true;
+	static int results;
+	static JLabel outOfText = new JLabel();
 
 	static void initGui(Autocomplete autocomplete, int k){
 		
@@ -71,8 +73,9 @@ public class gui {
 		logo.setFont(new Font("Serif", Font.PLAIN, 52));
 		//Add search button
 		JButton showButton = new JButton("Search");
+
 		
-		//Show everything
+		//Add everything
 		f.add(logo, c);
 		c.gridx = 1;
 		c.gridy = 1;
@@ -90,7 +93,13 @@ public class gui {
 		c.anchor = GridBagConstraints.LINE_END;
 		c.gridheight = GridBagConstraints.REMAINDER;
 		f.add(Box.createGlue(), c);
+		c.gridy=4;
+		c.anchor = GridBagConstraints.EAST;
+		f.add(outOfText,c);
 		f.pack();
 		f.setVisible(true);
+	}
+	public static void setResults(int resultsIn, int k){
+		outOfText.setText("Showing " + k + " out of " + resultsIn);
 	}
 }
