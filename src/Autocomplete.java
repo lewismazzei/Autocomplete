@@ -22,7 +22,7 @@ public class Autocomplete {
 		return 0;
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		//initialise array, import data
 		Term[] cities = Parser.importData("cities.txt");
 		//cast array to list
@@ -31,17 +31,29 @@ public class Autocomplete {
 		Collections.sort(sortedCities);
 		//cast list back to array
 		sortedCities.toArray(cities);
+		System.out.println(cities[cities.length-1]);
 		//input string
-		String prefix = "glas";
+		String prefix = "진";
 		//find first and last occurence of queries matching the input string
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(cities, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+		System.out.println(firstIndex + " : " + lastIndex);
+		System.out.println(cities[firstIndex].getQuery() + " : " + cities[lastIndex].getQuery());
 		//create an array of matches by taking the subset of the full array between the first and last occurence
-		Term[] matches = Arrays.copyOfRange(cities, firstIndex, lastIndex);
-		//print out matches
-		for (Term match : matches) {
-			System.out.println(match.getQuery());
+		Term[] matches = null;
+		try {
+			matches = Arrays.copyOfRange(cities, firstIndex, lastIndex);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("First Index: " + firstIndex + "\nLast Index: " + lastIndex);
 		}
+
+		//print out matches
+		//for (Term match : matches) {
+		//	System.out.println(match.getQuery());
+		//}
+		//for (Term match : matches) {
+		//	System.out.println(match.getQuery());
+		//}
 		gui.initGui();
 	}
 }
