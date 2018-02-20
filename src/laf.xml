@@ -1,0 +1,10 @@
+<synth>
+<style id="button">
+	<opaque value="true"/>
+	<insets top="3" left="3" right="3" bottom="3" />
+	<state>
+		<color type="TEXT_FOREGROUND" value="#FFFFF"/>
+	</state>
+</style>
+<bind style="button" type="region" key="Button"/>
+</synth>
