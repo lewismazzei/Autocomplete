@@ -32,6 +32,8 @@ public class gui{
 
 		JFrame f = new JFrame();
 		f.setLayout(new GridBagLayout());
+		f.setPreferredSize(new Dimension(400,300));
+		f.setResizable(false);
 		GridBagConstraints c = new GridBagConstraints();
 		if(shouldFill){
 			c.fill = GridBagConstraints.HORIZONTAL;
@@ -63,15 +65,22 @@ public class gui{
 		c.gridy = 0;
 
 
+		//Add Logo
+		JLabel logo = new JLabel("SatNav");
+		logo.setFont(new Font("Serif", Font.PLAIN, 52));
+		//Add search button
 		JButton showButton = new JButton("Search");
 		
 		//Show everything
-		f.add(destination, c);
+		f.add(logo, c);
 		c.gridx = 1;
 		c.gridy = 1;
+		f.add(destination, c);
+		c.gridx = 1;
+		c.gridy = 2;
 		f.add(searchCombo, c);
 		c.gridx = 2;
-		c.gridy = 1;
+		c.gridy = 2;
 		f.add(showButton, c);
 		c.weighty = 1.0;
 
@@ -80,7 +89,7 @@ public class gui{
 		c.anchor = GridBagConstraints.LINE_END;
 		c.gridheight = GridBagConstraints.REMAINDER;
 		f.add(Box.createGlue(), c);
-
+		f.pack();
 		f.setVisible(true);
 	}
 }
