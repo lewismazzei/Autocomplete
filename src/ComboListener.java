@@ -24,11 +24,12 @@ public class ComboListener extends KeyAdapter{
 				String text = ((JTextField)key.getSource()).getText();
 				System.out.println(text);
 				Term[] termMatches = autocomplete.allMatches(text);
+				gui.setResults(termMatches.length + 1, k);
 				//for (Term termmatch : termMatches) {
 				//	System.out.print(termmatch);
 				//}
 				ArrayList<String> matches = new ArrayList<>();
-
+				
 
 				if (termMatches != null) {
 					for (Term match : termMatches) {
