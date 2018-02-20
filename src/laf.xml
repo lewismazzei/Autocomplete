@@ -1,10 +1,32 @@
 <synth>
+<style id="background">
+	<opaque value="true"/>
+	<font name="Veranda" size="14"/>
+	<state>
+		<color value="#ffffff" type="BACKGROUND"/>
+		<color value="#999999" type="FOREGROUND"/>
+	</state>
+</style>
+<bind style="background" type="region" key=".*"/>
 <style id="button">
 	<opaque value="true"/>
-	<insets top="3" left="3" right="3" bottom="3" />
+	<insets top="4" left="4" right="4" bottom="4" />
 	<state>
-		<color type="TEXT_FOREGROUND" value="#FFFFF"/>
+		<color type="BACKGROUND" value="#999999"/>
+		<color type="FOREGROUND" value="#ebebe0"/>
+	</state>
+	<state value="MOUSE_OVER" id="one">
+			<color type="BACKGROUND" value="#737373"/>
+			<color type="FOREGROUND" value="#ebebe0"/>
 	</state>
 </style>
 <bind style="button" type="region" key="Button"/>
+<style id="combo">
+	<state>
+		<font name="Veranda" size="14"/>
+		<color type="FOREGROUND" value="#999999"/>
+		<color type="FOCUS" value="#999999"/>
+	</state>
+</style>
+<bind style="combo" type="region" key="ComboBox"/>
 </synth>
