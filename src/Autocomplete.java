@@ -13,7 +13,7 @@ public class Autocomplete {
 	}
 	// Returns all terms that start with the given prefix, in descending order of weight.
 	public Term[] allMatches(String prefix) {
-		//find the first and last indexes that match the prefix
+		//find the first and last indexes that match the given prefix
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 
@@ -36,19 +36,16 @@ public class Autocomplete {
 
 	// Returns the number of terms that start with the given prefix.
 	public int numberOfMatches(String prefix) {
+        //find the first and last indexes that match the given prefix
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-
-		if (firstIndex < 0 || lastIndex < 0) {
-			return 0;
+        //if there are matches...
+        if (firstIndex >= 0 && lastIndex >= 0) {
+            //return the number of matches (difference between the first and last indexes)
+			return lastIndex - firstIndex;
+        //if there are not return 0
 		} else {
-			return (lastIndex - firstIndex);
+			return 0;
 		}
 	}
-
-	public Term[] getTerms() {
-		return terms;
-	}
 }
-//this took me ages to work out, realised i didn't need it but keeping it around in case it turns out we do need it for some reason
-//lowerCaseCities = lowerCaseCities.stream().map(term -> new Term(term.getQuery().toLowerCase(), term.getWeight())).collect(Collectors.toList());

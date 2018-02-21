@@ -5,74 +5,61 @@ public class BinarySearchDeluxe {
 
     //returns the index of the first key in a[] that equals the search key, or -1 if no such key.
     public static <Key> int firstIndexOf(Key[] a, Key key, Comparator<Key> comparator) {
+        //if any of the arguments passed are null throw an exception
         if (a == null || key == null || comparator == null) {
             throw new NullPointerException();
         }
 
+        //store the original array for use later
         Key[] aOriginal = a;
-
-        int passes = 0;
-
+        //binary search the array for a given key and store the index of the random match found
         int randomMatchIndex = binarySearch(a, key, comparator);
-
+        //if no keys are found by the binary search return -1
         if (randomMatchIndex == -1) return -1;
 
+        //loop until the first index matching the key has been found
         while (true) {
+            //if the current index is the first in the current array (which is also the first in the original array) then the first index has been found
             if (randomMatchIndex == 0) return randomMatchIndex;
+            //if the element to the left and the current element (which always matches the key) do not match then the first index has been found...
             if (comparator.compare(a[randomMatchIndex], a[randomMatchIndex-1]) != 0) break;
+            //...otherwise it has not been found so split the array (between the start of the orignal array and the current matching index)
             a = Arrays.copyOfRange(a, 0, randomMatchIndex);
+            //search for another matching key in this now smaller array
             randomMatchIndex = binarySearch(a, key, comparator);
-            passes++;
         }
+        //once the first index has been found, search for the corresponding element in the original array and return its index
 		//System.out.println("Passes: " + passes);
 		//System.out.println("1 + log2N: " + (1 + (Math.log(a.length)/Math.log(2))));
         return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
-
-        ////find a random index that matches the key
-        //int j = binarySearch(a, key, comparator);
-        //
-        ////if a key has been found...
-        //if (j >= 0) {
-        //    //...loop from the random index towards the start of the array
-        //    for (int i = j; i >= 0; i--) {
-        //        //if the start of the list has been reached the first index has been found
-        //        if (i == 0) {
-        //            return i;
-        //        //otherwise, check to see if the next element to the left still matches the prefix, if it doesn't, the first index has been found
-        //        } else {
-			//		firstIndexCounter++;
-        //            if (comparator.compare(a[i], a[i-1]) != 0) {
-        //                return i;
-        //            }
-        //            //if the next element to the left did still match the prefix then just continue looping through elements
-        //        }
-        //    }
-        //}
-        ////if the key has not been found return -1
-        //return -1;
     }
 
     //returns the index of the last key in a[] that equals the search key, or -1 if no such key.
     public static <Key> int lastIndexOf(Key[] a, Key key, Comparator<Key> comparator) {
+        //if any of the arguments passed are null throw an exception
         if (a == null || key == null || comparator == null) {
             throw new NullPointerException();
         }
 
+        //store the original array for use later
         Key[] aOriginal = a;
-
-        int passes = 0;
-
+        //binary search the array for a given key and store the index of the random match found
         int randomMatchIndex = binarySearch(a, key, comparator);
-
+        //if no keys are found by the binary search return -1
         if (randomMatchIndex == -1) return -1;
 
+        //loop until the first index matching the key has been found
         while (true) {
+            //if the current index is the first in the current array (which is also the first in the original array) then the first index has been found
             if (randomMatchIndex == a.length-1) return randomMatchIndex;
+            //if the element to the left and the current element (which always matches the key) do not match then the first index has been found...
             if (comparator.compare(a[randomMatchIndex], a[randomMatchIndex+1]) != 0) break;
+            //...otherwise it has not been found so split the array (between the start of the orignal array and the current matching index)
             a = Arrays.copyOfRange(a, randomMatchIndex, a.length-1);
+            //search for another matching key in this now smaller array
             randomMatchIndex = binarySearch(a, key, comparator);
-            passes++;
         }
+        //once the first index has been found, search for the corresponding element in the original array and return its index
         return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
     }
 
@@ -99,6 +86,4 @@ public class BinarySearchDeluxe {
         }
         return -1;
     }
-
-
 }
