@@ -1,0 +1,4 @@
+Build instructions:
+	Type "javac *.java" into command line
+Program instructions:
+	Type "java Main [filename] [k]
