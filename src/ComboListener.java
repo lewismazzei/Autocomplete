@@ -9,7 +9,8 @@ import javax.swing.JTextField;
 public class ComboListener extends KeyAdapter{
 	JComboBox listener;
 	Autocomplete autocomplete;
-	int k;	
+	int k;
+
 	@SuppressWarnings("rawtypes")
 	public ComboListener(JComboBox listener, Autocomplete autocomplete, int k){
 		this.autocomplete = autocomplete;
