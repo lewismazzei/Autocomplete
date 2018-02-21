@@ -24,6 +24,8 @@ public class BinarySearchDeluxe {
             randomMatchIndex = binarySearch(a, key, comparator);
             passes++;
         }
+		//System.out.println("Passes: " + passes);
+		//System.out.println("1 + log2N: " + (1 + (Math.log(a.length)/Math.log(2))));
         return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
 
         ////find a random index that matches the key
