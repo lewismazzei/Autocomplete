@@ -28,7 +28,6 @@ public class ComboListener extends KeyAdapter{
 					gui.setResults(matches.length + 1, k);
                     listener.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(matches, 0, k)));
                 } else {
-                    System.out.println("yo");
                     listener.hidePopup();
                 }
 				//Set selected index as -1
