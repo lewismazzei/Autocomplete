@@ -113,15 +113,15 @@ public class gui {
 		f.pack();
 		f.setVisible(true);
 	}
-	public static void setResults(int resultsIn, int k){
+	public static void setResults(int numOfResults, int k){
 		//if there are k or more search results update label to say we are only showing k results
-		if (resultsIn >= k) {
-			outOfText.setText("Showing " + k + " out of " + resultsIn);
+		if (numOfResults >= k) {
+			outOfText.setText("Showing " + k + " out of " + numOfResults);
 		//if there are between 1 and k results update label to say we are showing all results
-		} else if (resultsIn > 0 && resultsIn < k){
-			outOfText.setText("Showing " + resultsIn + " out of " + resultsIn);
+		} else if (numOfResults > 0 && numOfResults < k){
+			outOfText.setText("Showing " + numOfResults + " out of " + numOfResults);
 		//if there are no results update label to indicate this
-		} else if (resultsIn == 0) {
+		} else if (numOfResults == 0) {
 			outOfText.setText("");
 		//there cannot legally be a negative number of results
 		} else {

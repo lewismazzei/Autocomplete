@@ -13,19 +13,22 @@ public class Autocomplete {
 	}
 	// Returns all terms that start with the given prefix, in descending order of weight.
 	public Term[] allMatches(String prefix) {
-		//find the first
+		//find the first and last indexes that match the prefix
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 
+		//intialise matches array to null, there might not be any matches
 		Term[] matches = null;
 
+		//if there are matches...
 		if (firstIndex >= 0 && lastIndex >= 0) {
+			//...create a subset of the terms array between the first and last match
 			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex+1);
-
+			//convert array to list so it can be sorted
 			List<Term> matchesList = Arrays.asList(matches);
-
+			//sort matches by reverse weight order
 			matchesList.sort(Term.byReverseWeightOrder());
-
+			//convert list back to array before returning it
 			matchesList.toArray(matches);
 		}
 		return matches;
@@ -39,7 +42,7 @@ public class Autocomplete {
 		if (firstIndex < 0 || lastIndex < 0) {
 			return 0;
 		} else {
-			return lastIndex - firstIndex;
+			return (lastIndex - firstIndex);
 		}
 	}
 
