@@ -23,7 +23,7 @@ public class Autocomplete {
 		//if there are matches...
 		if (firstIndex >= 0 && lastIndex >= 0) {
 			//...create a subset of the terms array between the first and last match
-			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex+1);
+			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex);
 			//convert array to list so it can be sorted
 			List<Term> matchesList = Arrays.asList(matches);
 			//sort matches by reverse weight order

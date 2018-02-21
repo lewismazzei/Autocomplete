@@ -28,9 +28,9 @@ public class BinarySearchDeluxe {
             //search for another matching key in this now smaller array
             randomMatchIndex = binarySearch(a, key, comparator);
         }
-        //once the first index has been found, search for the corresponding element in the original array and return its index
 		//System.out.println("Passes: " + passes);
 		//System.out.println("1 + log2N: " + (1 + (Math.log(a.length)/Math.log(2))));
+        //once the first index has been found, search for the corresponding element in the original array and return its index
         return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
     }
 
@@ -59,6 +59,8 @@ public class BinarySearchDeluxe {
             //search for another matching key in this now smaller array
             randomMatchIndex = binarySearch(a, key, comparator);
         }
+        //System.out.println("Passes: " + passes);
+        //System.out.println("1 + log2N: " + (1 + (Math.log(a.length)/Math.log(2))));
         //once the first index has been found, search for the corresponding element in the original array and return its index
         return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
     }

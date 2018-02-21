@@ -33,6 +33,7 @@ public class ComboListener extends KeyAdapter {
         //if the search bar is empty or there are no matches then hide the combo box and exit method
         if (text.equals("") || matches == null) {
             comboBox.hidePopup();
+            gui.setResults(autocomplete.numberOfMatches(text), k);
             return;
         }
         //array to hold the queries of all the matched term objects
