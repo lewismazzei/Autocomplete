@@ -2,13 +2,18 @@ public class Main {
     public static void main(String[] args) {
         String fileName = "";
         String k = "";
-
-        try {
-            fileName = args[0];
-            k = args[1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.getMessage();
-        }
+		if(args.length == 2){
+        	try {
+        	    fileName = args[0];
+        	    k = args[1];
+        	} catch (ArrayIndexOutOfBoundsException e) {
+        	    e.getMessage();
+        	}
+		}else{
+			System.out.println("Incorrect usage, please enter arguments" +
+							" [filename] [k]");
+			System.exit(0);
+		}
 
         //initialise gui
 		if(fileName.equals("cities.txt")){
