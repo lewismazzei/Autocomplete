@@ -8,7 +8,7 @@ public class gui {
 	static JLabel outOfText = new JLabel();
 
 	static void initGui(Autocomplete autocomplete, int k, int file){
-		//set stylesheet as default to begin with	
+		//set stylesheet as default to begin with
 		String xmlFile = "defaultlaf.xml";
 		//check what stylesheet to use
 		if (file == 0) {
@@ -35,13 +35,14 @@ public class gui {
 		f.setLayout(new GridBagLayout());
 		f.setPreferredSize(new Dimension(600,400));
 		f.setResizable(false);
+
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		//make layout fill its container horizontally
 		if (shouldFill) {
 			c.fill = GridBagConstraints.HORIZONTAL;
 		}
-		//create insets so that components aren't touching 
+		//create insets so that components aren't touching
 		//the frame
 		c.insets = new Insets(20,20,20,20);
 		
@@ -56,11 +57,14 @@ public class gui {
 		final JComboBox searchCombo = new JComboBox();
 		searchCombo.setPrototypeDisplayValue("xxxxxxxxxxxxxxx");
 		searchCombo.setEditable(true);
+
 		JTextField editor = (JTextField) searchCombo.getEditor().getEditorComponent();
-  		editor.setFocusable(true);
+
+		editor.setFocusable(true);
 		editor.setText("");
 		editor.addKeyListener(new ComboListener(searchCombo, autocomplete, k));
-		if(shouldWeightX){
+
+		if (shouldWeightX) {
 			c.weightx = 0.5;
 		}
 		c.weighty = 0.0;
@@ -69,8 +73,9 @@ public class gui {
 
 
 		//add Logo depending on file
+		//add logo depending on file
 		String logoText = "";
-		switch(file){
+		switch (file) {
 			case 0: logoText = "SatNav";
 					break;
 			case 1: logoText = "Wiktionary";
@@ -78,6 +83,7 @@ public class gui {
 			case 2: logoText = "Search Engine";
 					break;
 		}
+
 		JLabel logo = new JLabel(logoText);
 		logo.setFont(new Font("Serif", Font.PLAIN, 52));
 		//add search button
@@ -108,6 +114,7 @@ public class gui {
 		f.pack();
 		f.setVisible(true);
 	}
+
 	public static void setResults(int numOfResults, int k){
 		//if there are k or more search results update label to say we are only showing k results
 		if (numOfResults >= k) {
