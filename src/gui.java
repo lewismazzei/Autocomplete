@@ -1,15 +1,6 @@
 import javax.swing.*;
-import java.text.ParseException;
-import java.net.URL;
-import java.net.MalformedURLException;
 import javax.swing.plaf.synth.SynthLookAndFeel;
-import java.io.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.Collections;
 
 public class gui {
 	final static boolean shouldFill = true;
@@ -20,11 +11,13 @@ public class gui {
 		
 		//Will use this later to customise the gui
 		String xmlFile = "defaultlaf.xml";
-		if(file == 0){
+
+		if (file == 0) {
 			xmlFile = "satnavlaf.xml";
-		}else if(file == 1){
+		} else if (file == 1) {
 			xmlFile = "wiktionarylaf.xml";
 		}
+
 		SynthLookAndFeel laf = new SynthLookAndFeel();
 
 		try {

@@ -1,6 +1,5 @@
 import java.awt.event.KeyAdapter;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -25,11 +24,12 @@ public class ComboListener extends KeyAdapter{
 				Term[] matches = autocomplete.allMatches(text);
 
 
-                if (matches.length != 0) {
+                try {
 					gui.setResults(matches.length + 1, k);
                     listener.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(matches, 0, k)));
-                } else {
-                    listener.hidePopup();
+                } catch (NullPointerException e) {
+					System.out.println(e.getMessage());
+					listener.hidePopup();
                 }
 				//Set selected index as -1
 				listener.setSelectedIndex(-1);
