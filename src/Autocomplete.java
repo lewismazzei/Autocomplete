@@ -8,11 +8,19 @@ public class Autocomplete {
 	private final Term[] terms;
 	// Initializes the data structure from the given array of terms.
 	public Autocomplete(Term[] terms) {
+	    //if the terms array is null or if any of its entries are throw an exception
+	    if (terms == null || Arrays.asList(terms).contains(null)) {
+	        throw new NullPointerException();
+        }
 		Collections.sort(Arrays.asList(terms));
 		this.terms = terms;
 	}
 	// Returns all terms that start with the given prefix, in descending order of weight.
 	public Term[] allMatches(String prefix) {
+	    //if a null argument passed is null throw an exception
+	    if (prefix == null) {
+	        throw new NullPointerException();
+        }
 		//find the first and last indexes that match the given prefix
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
@@ -36,6 +44,10 @@ public class Autocomplete {
 
 	// Returns the number of terms that start with the given prefix.
 	public int numberOfMatches(String prefix) {
+        //if a null argument passed is null throw an exception
+	    if (prefix == null) {
+	        throw new NullPointerException();
+        }
         //find the first and last indexes that match the given prefix
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
