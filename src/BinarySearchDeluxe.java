@@ -12,7 +12,6 @@ public class BinarySearchDeluxe {
         Key[] aOriginal = a;
 
         int passes = 0;
-        //double maxComparesFirst = 1 + (Math.log(a.length)/Math.log(2));
 
         int randomMatchIndex = binarySearch(a, key, comparator);
 
@@ -21,12 +20,11 @@ public class BinarySearchDeluxe {
         while (true) {
             if (randomMatchIndex == 0) return randomMatchIndex;
             if (comparator.compare(a[randomMatchIndex], a[randomMatchIndex-1]) != 0) break;
-            a = Arrays.copyOfRange(a, randomMatchIndex, a.length-1);
+            a = Arrays.copyOfRange(a, 0, randomMatchIndex);
             randomMatchIndex = binarySearch(a, key, comparator);
             passes++;
         }
-        System.out.println("FI Passes: " + passes);
-        return binarySearch(aOriginal, a[randomMatchIndex], comparator);
+        return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
 
         ////find a random index that matches the key
         //int j = binarySearch(a, key, comparator);
@@ -73,8 +71,7 @@ public class BinarySearchDeluxe {
             randomMatchIndex = binarySearch(a, key, comparator);
             passes++;
         }
-        System.out.println("LI Passes: " + passes);
-        return binarySearch(aOriginal, a[randomMatchIndex], comparator);
+        return Arrays.binarySearch(aOriginal, a[randomMatchIndex]);
     }
 
     //binary search implementation using custom comparator
@@ -100,4 +97,6 @@ public class BinarySearchDeluxe {
         }
         return -1;
     }
+
+
 }

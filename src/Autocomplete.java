@@ -9,8 +9,8 @@ public class Autocomplete {
 	private final Term[] terms;
 	// Initializes the data structure from the given array of terms.
 	public Autocomplete(Term[] terms) {
-		this.terms = terms;
 		Collections.sort(Arrays.asList(terms));
+		this.terms = terms;
 	}
 	// Returns all terms that start with the given prefix, in descending order of weight.
 	public Term[] allMatches(String prefix) {
@@ -21,7 +21,7 @@ public class Autocomplete {
 		Term[] matches = null;
 
 		if (firstIndex >= 0 && lastIndex >= 0) {
-			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex);
+			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex+1);
 
 			List<Term> matchesList = Arrays.asList(matches);
 
@@ -34,8 +34,6 @@ public class Autocomplete {
 
 	// Returns the number of terms that start with the given prefix.
 	public int numberOfMatches(String prefix) {
-		Collections.sort(Arrays.asList(terms));
-
 		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 

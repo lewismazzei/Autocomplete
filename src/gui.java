@@ -14,7 +14,6 @@ import java.util.Collections;
 public class gui {
 	final static boolean shouldFill = true;
 	final static boolean shouldWeightX = true;
-	static int results;
 	static JLabel outOfText = new JLabel();
 
 	static void initGui(Autocomplete autocomplete, int k, int file){
@@ -27,15 +26,17 @@ public class gui {
 			xmlFile = "wiktionarylaf.xml";
 		}
 		SynthLookAndFeel laf = new SynthLookAndFeel();
-		try{
-		laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
-		}catch(Exception e){
-			System.out.println(e);			
+
+		try {
+		    laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
+		} catch(Exception e){
+			System.out.println(e.getMessage());
 		}
-		try{
-		UIManager.setLookAndFeel(laf);
-		}catch(Exception e){
-			System.out.println(e);
+
+		try {
+		    UIManager.setLookAndFeel(laf);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
 
 		JFrame f = new JFrame();
@@ -43,13 +44,20 @@ public class gui {
 		f.setPreferredSize(new Dimension(600,400));
 		f.setResizable(false);
 		GridBagConstraints c = new GridBagConstraints();
-		if(shouldFill){
+
+		if (shouldFill) {
 			c.fill = GridBagConstraints.HORIZONTAL;
 		}
+
 		c.insets = new Insets(20,20,20,20);
 				
 		c.fill = GridBagConstraints.HORIZONTAL;
 
+		//Sort out the array
+		//Term[] cities = Parser.importData("cities.txt");
+		//java.util.List<Term> searchQueryList = Arrays.asList(cities);
+		//Collections.sort(searchQueryList);
+		//searchQueryList.toArray(cities);
 		
 		//Create combobox and add Key Listener
 		String searchLabel = "";
