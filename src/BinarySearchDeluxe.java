@@ -1,72 +1,80 @@
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class BinarySearchDeluxe {
 
     //returns the index of the first key in a[] that equals the search key, or -1 if no such key.
     public static <Key> int firstIndexOf(Key[] a, Key key, Comparator<Key> comparator) {
-		int firstIndexCounter = 0;
-		double maxComparesFirst = 1 + (Math.log(a.length)/Math.log(2));
         if (a == null || key == null || comparator == null) {
             throw new NullPointerException();
         }
 
-        //find a random index that matches the key
-        int j = binarySearch(a, key, comparator);
+        Key[] aOriginal = a;
 
-        //if a key has been found...
-        if (j >= 0) {
-            //...loop from the random index towards the start of the array
-            for (int i = j; i >= 0; i--) {
-                //if the start of the list has been reached the first index has been found
-                if (i == 0) {
-                    return i;
-                //otherwise, check to see if the next element to the left still matches the prefix, if it doesn't, the first index has been found
-                } else {
-					firstIndexCounter++;
-                    if (comparator.compare(a[i], a[i-1]) != 0) {
-                        return i;
-                    }
-                    //if the next element to the left did still match the prefix then just continue looping through elements
-                }
-            }
+        int passes = 0;
+        //double maxComparesFirst = 1 + (Math.log(a.length)/Math.log(2));
+
+        int randomMatchIndex = binarySearch(a, key, comparator);
+
+        if (randomMatchIndex == -1) return -1;
+
+        while (true) {
+            if (randomMatchIndex == 0) return randomMatchIndex;
+            if (comparator.compare(a[randomMatchIndex], a[randomMatchIndex-1]) != 0) break;
+            a = Arrays.copyOfRange(a, randomMatchIndex, a.length-1);
+            randomMatchIndex = binarySearch(a, key, comparator);
+            passes++;
         }
-        //if the key has not been found return -1
-        return -1;
+        System.out.println("FI Passes: " + passes);
+        return binarySearch(aOriginal, a[randomMatchIndex], comparator);
+
+        ////find a random index that matches the key
+        //int j = binarySearch(a, key, comparator);
+        //
+        ////if a key has been found...
+        //if (j >= 0) {
+        //    //...loop from the random index towards the start of the array
+        //    for (int i = j; i >= 0; i--) {
+        //        //if the start of the list has been reached the first index has been found
+        //        if (i == 0) {
+        //            return i;
+        //        //otherwise, check to see if the next element to the left still matches the prefix, if it doesn't, the first index has been found
+        //        } else {
+			//		firstIndexCounter++;
+        //            if (comparator.compare(a[i], a[i-1]) != 0) {
+        //                return i;
+        //            }
+        //            //if the next element to the left did still match the prefix then just continue looping through elements
+        //        }
+        //    }
+        //}
+        ////if the key has not been found return -1
+        //return -1;
     }
 
     //returns the index of the last key in a[] that equals the search key, or -1 if no such key.
     public static <Key> int lastIndexOf(Key[] a, Key key, Comparator<Key> comparator) {
-		int lastIndexCounter = 0;
-		double maxComparesLast = 1 + (Math.log(a.length)/Math.log(2));
         if (a == null || key == null || comparator == null) {
             throw new NullPointerException();
         }
 
-        //find a random index that matches the key
-        int j = binarySearch(a, key, comparator);
+        Key[] aOriginal = a;
 
-        //if a key has been found...
-        if (j >= 0) {
-            //...loop from the random index towards the end of the array
-            for (int i = j; i < a.length; i++) {
-                //if the end of the list has been reached the last index has been found
-                if (i == a.length - 1) {
-                    return i;
-                //otherwise, check to see if the next element to the right still matches the prefix, if it doesn't, the last index has been found
-                } else {
+        int passes = 0;
 
-					lastIndexCounter++;
-                    if (comparator.compare(a[i], a[i+1]) != 0) {
-						System.out.println("No of compares: " + lastIndexCounter);
-						System.out.println("Expected no of compares: " + maxComparesLast);
-				         return i;
-                    }
-                    //if the next element to the right did still match the prefix then just continue looping through elements
-                }
-            }
-		        }
-        //if the key has not been found return -1
-        return -1;
+        int randomMatchIndex = binarySearch(a, key, comparator);
+
+        if (randomMatchIndex == -1) return -1;
+
+        while (true) {
+            if (randomMatchIndex == a.length-1) return randomMatchIndex;
+            if (comparator.compare(a[randomMatchIndex], a[randomMatchIndex+1]) != 0) break;
+            a = Arrays.copyOfRange(a, randomMatchIndex, a.length-1);
+            randomMatchIndex = binarySearch(a, key, comparator);
+            passes++;
+        }
+        System.out.println("LI Passes: " + passes);
+        return binarySearch(aOriginal, a[randomMatchIndex], comparator);
     }
 
     //binary search implementation using custom comparator

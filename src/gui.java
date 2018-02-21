@@ -57,7 +57,7 @@ public class gui {
 		searchCombo.setPrototypeDisplayValue("xxxxxxxxxxxxxxx");
 		searchCombo.setEditable(true);
 		JTextField editor = (JTextField) searchCombo.getEditor().getEditorComponent();
-		editor.setFocusable(true);
+  		editor.setFocusable(true);
 		editor.setText("");
 		editor.addKeyListener(new ComboListener(searchCombo, autocomplete, k));
 		if(shouldWeightX){
@@ -100,6 +100,18 @@ public class gui {
 		f.setVisible(true);
 	}
 	public static void setResults(int resultsIn, int k){
-		outOfText.setText("Showing " + k + " out of " + resultsIn);
+		//if there are k or more search results update label to say we are only showing k results
+		if (resultsIn >= k) {
+			outOfText.setText("Showing " + k + " out of " + resultsIn);
+		//if there are between 1 and k results update label to say we are showing all results
+		} else if (resultsIn > 0 && resultsIn < k){
+			outOfText.setText("Showing " + resultsIn + " out of " + resultsIn);
+		//if there are no results update label to indicate this
+		} else if (resultsIn == 0) {
+			outOfText.setText("Showing 0 out of 0");
+		//there cannot legally be a negative number of results
+		} else {
+			throw new IllegalArgumentException();
+		}
 	}
 }

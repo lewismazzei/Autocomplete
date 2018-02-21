@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.lang.String;
@@ -9,20 +10,18 @@ public class Autocomplete {
 	// Initializes the data structure from the given array of terms.
 	public Autocomplete(Term[] terms) {
 		this.terms = terms;
+		Collections.sort(Arrays.asList(terms));
 	}
 	// Returns all terms that start with the given prefix, in descending order of weight.
 	public Term[] allMatches(String prefix) {
-		Collections.sort(Arrays.asList(terms));
 		//find the first
-		int firstIndex = BinarySearchDeluxe.firstIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
-		int lastIndex = BinarySearchDeluxe.lastIndexOf(terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+		int firstIndex = BinarySearchDeluxe.firstIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+		int lastIndex = BinarySearchDeluxe.lastIndexOf(this.terms, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
 
-		System.out.println(firstIndex + " : " + lastIndex);
 		Term[] matches = null;
 
 		if (firstIndex >= 0 && lastIndex >= 0) {
-			System.out.println("hi");
-			matches = Arrays.copyOfRange(terms, firstIndex, lastIndex);
+			matches = Arrays.copyOfRange(this.terms, firstIndex, lastIndex);
 
 			List<Term> matchesList = Arrays.asList(matches);
 
