@@ -11,6 +11,12 @@ public class Main {
         }
 
         //initialise gui
-        gui.initGui(new Autocomplete(Parser.importData(fileName)), Integer.parseInt(k));
+		if(fileName.equals("cities.txt")){
+			gui.initGui(new Autocomplete(Parser.importData(fileName)), Integer.parseInt(k), 0);
+		}else if(fileName.equals("wiktionary.txt")){
+			gui.initGui(new Autocomplete(Parser.importData(fileName)), Integer.parseInt(k), 1);
+		}else{
+			gui.initGui(new Autocomplete(Parser.importData(fileName)), Integer.parseInt(k), 2);
+		}
     }
 }

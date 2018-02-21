@@ -23,9 +23,9 @@ public class ComboListener extends KeyAdapter{
 				String text = ((JTextField)key.getSource()).getText();
 				Term[] matches = autocomplete.allMatches(text);
 
-				gui.setResults(matches.length + 1, k);
 
                 if (matches.length != 0) {
+					gui.setResults(matches.length + 1, k);
                     listener.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(matches, 0, k)));
                 } else {
                     System.out.println("yo");
@@ -38,6 +38,7 @@ public class ComboListener extends KeyAdapter{
 					listener.showPopup();
 				}else{
 					listener.hidePopup();
+					gui.setResults(0, k);
 				}
 	}
 }
