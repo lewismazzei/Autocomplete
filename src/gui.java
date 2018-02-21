@@ -17,10 +17,15 @@ public class gui {
 	static int results;
 	static JLabel outOfText = new JLabel();
 
-	static void initGui(Autocomplete autocomplete, int k){
+	static void initGui(Autocomplete autocomplete, int k, int file){
 		
 		//Will use this later to customise the gui
-		String xmlFile = "laf.xml";
+		String xmlFile = "defaultlaf.xml";
+		if(file == 0){
+			xmlFile = "satnavlaf.xml";
+		}else if(file == 1){
+			xmlFile = "wiktionarylaf.xml";
+		}
 		SynthLookAndFeel laf = new SynthLookAndFeel();
 		try{
 		laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
@@ -35,7 +40,7 @@ public class gui {
 
 		JFrame f = new JFrame();
 		f.setLayout(new GridBagLayout());
-		f.setPreferredSize(new Dimension(400,300));
+		f.setPreferredSize(new Dimension(600,400));
 		f.setResizable(false);
 		GridBagConstraints c = new GridBagConstraints();
 		if(shouldFill){
@@ -45,14 +50,13 @@ public class gui {
 				
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-		//Sort out the array
-		Term[] cities = Parser.importData("cities.txt");
-		java.util.List<Term> searchQueryList = Arrays.asList(cities);
-		Collections.sort(searchQueryList);
-		searchQueryList.toArray(cities);
 		
 		//Create combobox and add Key Listener
-		JLabel destination = new JLabel("Destination:");
+		String searchLabel = "";
+		if(file == 0){searchLabel = "Destination:";}
+		if(file == 1){searchLabel = "Search word:";}
+		if(file == 3){searchLabel = "Search:";}
+		JLabel destination = new JLabel(searchLabel);
 		final JComboBox searchCombo = new JComboBox();
 		searchCombo.setPrototypeDisplayValue("xxxxxxxxxxxxxxx");
 		searchCombo.setEditable(true);
@@ -68,8 +72,17 @@ public class gui {
 		c.gridy = 0;
 
 
-		//Add Logo
-		JLabel logo = new JLabel("SatNav");
+		//Add Logo depending on file
+		String logoText = "";
+		switch(file){
+			case 0: logoText = "SatNav";
+					break;
+			case 1: logoText = "Wiktionary";
+					break;
+			case 2: logoText = "Search Engine";
+					break;
+		}
+		JLabel logo = new JLabel(logoText);
 		logo.setFont(new Font("Serif", Font.PLAIN, 52));
 		//Add search button
 		JButton showButton = new JButton("Search");
@@ -108,7 +121,7 @@ public class gui {
 			outOfText.setText("Showing " + resultsIn + " out of " + resultsIn);
 		//if there are no results update label to indicate this
 		} else if (resultsIn == 0) {
-			outOfText.setText("Showing 0 out of 0");
+			outOfText.setText("");
 		//there cannot legally be a negative number of results
 		} else {
 			throw new IllegalArgumentException();
