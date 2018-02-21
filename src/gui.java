@@ -8,10 +8,9 @@ public class gui {
 	static JLabel outOfText = new JLabel();
 
 	static void initGui(Autocomplete autocomplete, int k, int file){
-		
-		//Will use this later to customise the gui
+		//set stylesheet as default to begin with	
 		String xmlFile = "defaultlaf.xml";
-
+		//check what stylesheet to use
 		if (file == 0) {
 			xmlFile = "satnavlaf.xml";
 		} else if (file == 1) {
@@ -19,7 +18,7 @@ public class gui {
 		}
 
 		SynthLookAndFeel laf = new SynthLookAndFeel();
-
+		//load the new stylesheet
 		try {
 		    laf.load(gui.class.getResourceAsStream(xmlFile), gui.class);
 		} catch(Exception e){
@@ -31,33 +30,29 @@ public class gui {
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-
+		//setup gui frame and layout
 		JFrame f = new JFrame();
 		f.setLayout(new GridBagLayout());
 		f.setPreferredSize(new Dimension(600,400));
 		f.setResizable(false);
 		GridBagConstraints c = new GridBagConstraints();
-
+		
+		//make layout fill its container horizontally
 		if (shouldFill) {
 			c.fill = GridBagConstraints.HORIZONTAL;
 		}
-
+		//create insets so that components aren't touching 
+		//the frame
 		c.insets = new Insets(20,20,20,20);
-				
-		c.fill = GridBagConstraints.HORIZONTAL;
-
-		//Sort out the array
-		//Term[] cities = Parser.importData("cities.txt");
-		//java.util.List<Term> searchQueryList = Arrays.asList(cities);
-		//Collections.sort(searchQueryList);
-		//searchQueryList.toArray(cities);
 		
-		//Create combobox and add Key Listener
+		//create label depending on file input
 		String searchLabel = "";
 		if(file == 0){searchLabel = "Destination:";}
 		if(file == 1){searchLabel = "Search word:";}
 		if(file == 3){searchLabel = "Search:";}
 		JLabel destination = new JLabel(searchLabel);
+
+		//create combobox for search
 		final JComboBox searchCombo = new JComboBox();
 		searchCombo.setPrototypeDisplayValue("xxxxxxxxxxxxxxx");
 		searchCombo.setEditable(true);
@@ -73,7 +68,7 @@ public class gui {
 		c.gridy = 0;
 
 
-		//Add Logo depending on file
+		//add Logo depending on file
 		String logoText = "";
 		switch(file){
 			case 0: logoText = "SatNav";
@@ -85,11 +80,11 @@ public class gui {
 		}
 		JLabel logo = new JLabel(logoText);
 		logo.setFont(new Font("Serif", Font.PLAIN, 52));
-		//Add search button
+		//add search button
 		JButton showButton = new JButton("Search");
 
 		
-		//Add everything
+		//add everything to frame
 		f.add(logo, c);
 		c.gridx = 1;
 		c.gridy = 1;
